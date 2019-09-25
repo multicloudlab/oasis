@@ -1,4 +1,4 @@
 FROM scratch
 
-ADD oasis .
+COPY oasis .
 CMD ["./oasis"]

@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-KUBECTL=$(which kubectl)
+KUBECTL=$(command -v kubectl)
 DOCKER_REGISTRY="quay.io"
 DOCKER_USERNAME="multicloudlab"
 DOCKER_PASSWORD=$(${KUBECTL} -n default get secret quay-cred -o jsonpath='{.data.password}' | base64 --decode)
