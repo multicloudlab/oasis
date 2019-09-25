@@ -14,8 +14,10 @@
 
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
-    fmt.Println("hello, oasis!")
+	fmt.Println("hello, oasis!")
 }
