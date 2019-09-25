@@ -38,7 +38,7 @@ work: $(GOBIN)
 ############################################################
 check: fmt lint
 
-fmt: fmt: format-go format-python
+fmt: format-go format-python
 
 lint: lint-all
 
