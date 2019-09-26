@@ -69,7 +69,7 @@ test:
 ############################################################
 
 build:
-	@common/scripts/bin/gobuild.sh oasis ./cmd
+	@common/scripts/gobuild.sh oasis ./cmd
 
 ############################################################
 # images section
