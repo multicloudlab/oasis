@@ -23,8 +23,6 @@ if [[ "${VERBOSE}" == "1" ]];then
     set -x
 fi
 
-SCRIPTPATH="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
 OUT=${1:?"output path"}
 shift
 
@@ -47,22 +45,7 @@ if [[ "${STATIC}" !=  "1" ]];then
     LDFLAGS=""
 fi
 
-# gather buildinfo if not already provided
-# For a release build BUILDINFO should be produced
-# at the beginning of the build and used throughout
-if [[ -z ${BUILDINFO} ]];then
-    BUILDINFO=$(mktemp)
-    "${SCRIPTPATH}/report_build_info.sh" > "${BUILDINFO}"
-fi
-
-# BUILD LD_EXTRAFLAGS
-LD_EXTRAFLAGS=""
-while read -r line; do
-    LD_EXTRAFLAGS="${LD_EXTRAFLAGS} -X ${line}"
-done < "${BUILDINFO}"
-
 time GOOS=${BUILD_GOOS} GOARCH=${BUILD_GOARCH} ${GOBINARY} build \
         ${V} "${GOBUILDFLAGS_ARRAY[@]}" ${GCFLAGS:+-gcflags "${GCFLAGS}"} \
         -o "${OUT}" \
-        -trimpath \
-        -ldflags "${LDFLAGS} ${LD_EXTRAFLAGS}" "${@}"
+        -ldflags "${LDFLAGS}" "${@}"
