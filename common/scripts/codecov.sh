@@ -18,6 +18,13 @@ set -e
 set -u
 set -o pipefail
 
+# turn off GOSUMDB check
+export GOSUMDB=off
+
+# add $GOPATH/bin to $PATH
+# TODO: add $GOPATH/bin to $PATH in build-tools image
+export PATH=${PATH}:${GOPATH}/bin
+
 ROOTDIR="$(cd "$(dirname "$0")"/../.. ; pwd -P)"
 REPORT_PATH=${REPORT_PATH:-"${GOPATH}/out/codecov"}
 #CODECOV_SKIP=${GOPATH}/out/codecov/codecov.skip
