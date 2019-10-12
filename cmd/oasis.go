@@ -17,7 +17,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/IBM/go-repo-template/pkg/stringutil"
+	"github.com/multicloudlab/oasis/pkg/stringutil"
 )
 
 func main() {
