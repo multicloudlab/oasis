@@ -60,7 +60,7 @@ function code_coverage() {
   fi
 
   #remove skipped tests from .cov file
-  remove_skipped_tests_from_cov "${COVERAGEDIR}/${filename}.cov"
+#   remove_skipped_tests_from_cov "${COVERAGEDIR}/${filename}.cov"
 }
 
 function wait_for_proc() {
@@ -72,37 +72,37 @@ function wait_for_proc() {
   done
 }
 
-function parse_skipped_tests() {
-  while read -r entry; do
-    if [[ "${SKIPPED_TESTS_GREP_ARGS}" != '' ]]; then
-      SKIPPED_TESTS_GREP_ARGS+='\|'
-    fi
-    if [[ "${entry}" != "#"* ]]; then
-      SKIPPED_TESTS_GREP_ARGS+="\\(${entry}\\)"
-    fi
-  done < "${CODECOV_SKIP}"
-}
+# function parse_skipped_tests() {
+#   while read -r entry; do
+#     if [[ "${SKIPPED_TESTS_GREP_ARGS}" != '' ]]; then
+#       SKIPPED_TESTS_GREP_ARGS+='\|'
+#     fi
+#     if [[ "${entry}" != "#"* ]]; then
+#       SKIPPED_TESTS_GREP_ARGS+="\\(${entry}\\)"
+#     fi
+#   done < "${CODECOV_SKIP}"
+# }
 
-function remove_skipped_tests_from_cov() {
-  while read -r entry; do
-    entry="$(echo "${entry}" | sed 's/\//\\\//g')"
-    sed -i "/${entry}/d" "$1"
-  done < "${CODECOV_SKIP}"
-}
+# function remove_skipped_tests_from_cov() {
+#   while read -r entry; do
+#     entry="$(echo "${entry}" | sed 's/\//\\\//g')"
+#     sed -i "/${entry}/d" "$1"
+#   done < "${CODECOV_SKIP}"
+# }
 
 cd "${ROOTDIR}"
 
-parse_skipped_tests
+# parse_skipped_tests
 
 # For generating junit.xml files
 go get github.com/jstemmer/go-junit-report
 
 echo "Code coverage test (concurrency ${MAXPROCS})"
 for P in $(go list "${DIR}" | grep -v vendor); do
-  if echo "${P}" | grep -q "${SKIPPED_TESTS_GREP_ARGS}"; then
-    echo "Skipped ${P}"
-    continue
-  fi
+#   if echo "${P}" | grep -q "${SKIPPED_TESTS_GREP_ARGS}"; then
+#     echo "Skipped ${P}"
+#     continue
+#   fi
   code_coverage "${P}" &
   wait_for_proc
 done
