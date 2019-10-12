@@ -20,12 +20,12 @@ set -o pipefail
 
 ROOTDIR="$(cd "$(dirname "$0")"/../.. ; pwd -P)"
 REPORT_PATH=${REPORT_PATH:-"${GOPATH}/out/codecov"}
-CODECOV_SKIP=${GOPATH}/out/codecov/codecov.skip
+#CODECOV_SKIP=${GOPATH}/out/codecov/codecov.skip
 MAXPROCS="${MAXPROCS:-}"
 mkdir -p "${GOPATH}"/out/codecov
 
 DIR="./..."
-SKIPPED_TESTS_GREP_ARGS=
+#SKIPPED_TESTS_GREP_ARGS=
 TEST_RETRY_COUNT=3
 
 if [ "${1:-}" != "" ]; then
