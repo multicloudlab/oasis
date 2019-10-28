@@ -70,4 +70,3 @@ Please refer to [Trouble shooting documentation](docs/trouble_shooting.md) for f
 
 If you have any further question about xxx, please refer to
 [XXX help documentation](docs/xxx_help.md) for further information.
-
