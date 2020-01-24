@@ -131,4 +131,4 @@ build-push-images: $(CONFIG_DOCKER_TARGET)
 # clean section
 ############################################################
 clean:
-	rm -f oasis
+	@rm -f oasis
